@@ -5,6 +5,8 @@ import { AWSIoTProvider, MqttOverWSProvider } from '@aws-amplify/pubsub/lib/Prov
 
 import "./App.css";
 
+import awsConfig from "./aws-exports";
+
 Amplify.configure(awsConfig);
 PubSub.configure();
 
@@ -123,7 +125,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
       </div>
     );
   }
