@@ -111,7 +111,32 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h2>Add Todo</h2>
+        <Connect mutation={graphqlOperation(mutations.createTodo)}>
+          {({ mutation }) => <AddTodo onCreate={mutation} />}
+        </Connect>
 
+        <Connect
+          query={graphqlOperation(queries.listTodos)}
+          subscription={graphqlOperation(subscriptions.onCreateTodo)}
+          onSubscriptionMsg={(prev, { onCreateTodo }) => {
+            return {
+              listTodos: {
+                items: [...prev.listTodos.items, onCreateTodo]
+              }
+            };
+          }}
+        >
+          {({ data: { listTodos }, loading, error }) => {
+            if (error) return <h3>Error</h3>;
+            if (loading || !listTodos) return <h3>Loading...</h3>;
+            return listTodos.items.length ? (
+              <ListView todos={listTodos ? listTodos.items : []} />
+            ) : (
+              <h3>No todos yet...</h3>
+            );
+          }}
+        </Connect>
       </div>
     );
   }
