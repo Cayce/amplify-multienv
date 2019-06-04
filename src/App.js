@@ -35,15 +35,6 @@ Amplify.addPluggable(new MqttOverWSProvider({
     aws_pubsub_endpoint: 'wss://iot.eclipse.org:443/mqtt'
 }))
 
-PubSub.subscribe('silo-mobile-app').subscribe({
-    next: data => console.log('Message received', data),
-    error: error => console.error(error),
-    close: () => console.log('Done')
-})
-
-console.log('Message sent')
-PubSub.publish('silo-mobile-app', { msg: 'Hello to all subscribers!' })
-
 const ListView = ({ todos }) => (
   <div>
     <h2>All Todos</h2>
