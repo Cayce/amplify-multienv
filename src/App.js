@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Amplify, { graphqlOperation, PubSub } from "aws-amplify";
+import Amplify, { graphqlOperation, PubSub, Auth } from "aws-amplify";
 import { withAuthenticator, Connect } from "aws-amplify-react";
 import { AWSIoTProvider, MqttOverWSProvider } from '@aws-amplify/pubsub/lib/Providers'
 
@@ -12,6 +12,19 @@ import * as subscriptions from "./graphql/subscriptions";
 
 Amplify.configure(awsConfig);
 
+let username = 'Kirill'
+let password = 'Xdr%4321'
+Auth.signIn(username, password)
+    .then(user => {
+
+    }).catch(e => {
+    console.log(e)
+})
+
+Auth.currentCredentials().then((info) => {
+    const cognitoIdentityId = info._identityId;
+    console.log(cognitoIdentityId);
+});
 
 Amplify.addPluggable(new AWSIoTProvider({
     aws_pubsub_region: 'us-east-2',
