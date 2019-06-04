@@ -15,7 +15,7 @@ Amplify.configure(awsConfig);
 
 Amplify.addPluggable(new AWSIoTProvider({
     aws_pubsub_region: 'us-east-2',
-    aws_pubsub_endpoint: 'a73c5uwwia0zy-ats.iot.us-east-2.amazonaws.com'
+    aws_pubsub_endpoint: 'wss://a73c5uwwia0zy-ats.iot.us-east-2.amazonaws.com'
 }))
 
 Amplify.addPluggable(new MqttOverWSProvider({
