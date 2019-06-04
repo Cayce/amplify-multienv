@@ -30,12 +30,13 @@ Auth.currentCredentials().then((info) => {
 
 Amplify.addPluggable(new AWSIoTProvider({
     aws_pubsub_region: 'us-east-2',
-    aws_pubsub_endpoint: 'a73c5uwwia0zy-ats.iot.us-east-2.amazonaws.com'
+    aws_pubsub_endpoint: 'wss://a73c5uwwia0zy-ats.iot.us-east-2.amazonaws.com/mqtt'
 }))
-
+/*
 Amplify.addPluggable(new MqttOverWSProvider({
     aws_pubsub_endpoint: 'wss://iot.eclipse.org:443/mqtt'
 }))
+*/
 
 let sub = {
     next: data => console.log('Message received', data),
