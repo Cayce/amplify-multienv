@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Amplify, { graphqlOperation } from "aws-amplify";
+import Amplify, { graphqlOperation, PubSub } from "aws-amplify";
 import { withAuthenticator, Connect } from "aws-amplify-react";
+import { AWSIoTProvider, MqttOverWSProvider } from '@aws-amplify/pubsub/lib/Providers'
 
 import "./App.css";
 
@@ -10,6 +11,25 @@ import * as queries from "./graphql/queries";
 import * as subscriptions from "./graphql/subscriptions";
 
 Amplify.configure(awsConfig);
+
+
+Amplify.addPluggable(new AWSIoTProvider({
+    aws_pubsub_region: 'us-east-2',
+    aws_pubsub_endpoint: 'a73c5uwwia0zy-ats.iot.us-east-2.amazonaws.com'
+}))
+
+Amplify.addPluggable(new MqttOverWSProvider({
+    aws_pubsub_endpoint: 'wss://iot.eclipse.org:443/mqtt'
+}))
+
+PubSub.subscribe('silo-mobile-app').subscribe({
+    next: data => console.log('Message received', data),
+    error: error => console.error(error),
+    close: () => console.log('Done')
+})
+
+console.log('Message sent')
+PubSub.publish('silo-mobile-app', { msg: 'Hello to all subscribers!' })
 
 const ListView = ({ todos }) => (
   <div>

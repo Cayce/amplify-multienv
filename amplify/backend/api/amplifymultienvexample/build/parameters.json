@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "amplifymultienvexample",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcognito20860e82",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "S3DeploymentBucket": "amplify-multi-env-dev-20190604113902-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/2e2d6cc70e6eeb3e495b103940ffddb53aeb7975"
+}
