@@ -81,7 +81,7 @@
 		"authcognito20860e82": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-multi-env-20190207083846-deployment/amplify-cfn-templates/auth/cognito20860e82-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-multi-env-local-20190605144238-deployment/amplify-cfn-templates/auth/cognito20860e82-cloudformation-template.yml",
 				"Parameters": {
 					"identityPoolName": "cognito20860e82_identitypool_20860e82",
 					"allowUnauthenticatedIdentities": false,
@@ -139,14 +139,14 @@
 							"Arn"
 						]
 					},
-					"env": "master"
+					"env": "local"
 				}
 			}
 		},
 		"apiamplifymultienvexample": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-multi-env-20190207083846-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-multi-env-local-20190605144238-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"AppSyncApiName": "amplifymultienvexample",
 					"AuthCognitoUserPoolId": {
@@ -155,11 +155,19 @@
 							"Outputs.UserPoolId"
 						]
 					},
-					"schemaGraphql": "s3://amplify-multi-env-20190207083846-deployment/amplify-appsync-files/schema.graphql.1549918150793",
-					"ResolverBucket": "amplify-multi-env-20190207083846-deployment",
-					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549918150793",
-					"env": "master"
+					"S3DeploymentBucket": "amplify-multi-env-local-20190605144238-deployment",
+					"S3DeploymentRootKey": "amplify-appsync-files/2e2d6cc70e6eeb3e495b103940ffddb53aeb7975",
+					"env": "local"
+				}
+			}
+		},
+		"hostingS3AndCloudFront": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-multi-env-local-20190605144238-deployment/amplify-cfn-templates/hosting/template.json",
+				"Parameters": {
+					"bucketName": "amplify-multi-env-20190605144452-hostingbucket",
+					"env": "local"
 				}
 			}
 		}
